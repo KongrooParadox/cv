@@ -5,8 +5,9 @@ First attempt at a CV using LaTeX.
 ## To Do
 
 - [x] Working LaTeX document
-- [ ] Build using Nix (because why not make it reproducible ?)
-- [ ] Push to github.io instance using GitHub Actions
+- [x] Build using Nix (because why not make it reproducible ?)
+- [ ] Build with Github Actions
+- [ ] Release with Github Actions
 
 ## Credits
 
