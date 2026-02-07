@@ -1,0 +1,262 @@
+%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
+% \documentclass[10pt,a4paper,withhyper,normalphoto]{altacv}
+
+\documentclass[10pt,a4paper,withhyper]{altacv}
+%% AltaCV uses the fontawesome5 and simpleicons packages.
+%% See http://texdoc.net/pkg/fontawesome5 and http://texdoc.net/pkg/simpleicons for full list of symbols.
+
+% Change the page layout if you need to
+\geometry{left=1.25cm,right=1.25cm,top=1.25cm,bottom=1.25cm,columnsep=1.2cm}
+
+% The paracol package lets you typeset columns of text in parallel
+\usepackage{paracol}
+
+% Change the font if you want to, depending on whether
+% you're using pdflatex or xelatex/lualatex
+% WHEN COMPILING WITH XELATEX PLEASE USE
+% xelatex -shell-escape -output-driver="xdvipdfmx -z 0" sample.tex
+\iftutex
+  % If using xelatex or lualatex:
+  \setmainfont{Roboto Slab}
+  \setsansfont{Lato}
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  % If using pdflatex:
+  \usepackage[rm]{roboto}
+  \usepackage[defaultsans]{lato}
+  % \usepackage{sourcesanspro}
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+% Change the colours if you want to
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+\definecolor{DarkPastelRed}{HTML}{450808}
+\definecolor{PastelRed}{HTML}{8F0D0D}
+\definecolor{GoldenEarth}{HTML}{E7D192}
+\colorlet{name}{black}
+\colorlet{tagline}{PastelRed}
+\colorlet{heading}{DarkPastelRed}
+\colorlet{headingrule}{GoldenEarth}
+\colorlet{subheading}{PastelRed}
+\colorlet{accent}{PastelRed}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+% Change some fonts, if necessary
+\renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+\renewcommand{\personalinfofont}{\footnotesize}
+\renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+\renewcommand{\cvsubsectionfont}{\large\bfseries}
+
+
+% Change the bullets for itemize and rating marker
+% for \cvskill if you want to
+\renewcommand{\cvItemMarker}{{\small\textbullet}}
+\renewcommand{\cvRatingMarker}{\faCircle}
+% ...and the markers for the date/location for \cvevent
+% \renewcommand{\cvDateMarker}{\faCalendar*[regular]}
+% \renewcommand{\cvLocationMarker}{\faMapMarker*}
+
+
+% If your CV/résumé is in a language other than English,
+% then you probably want to change these so that when you
+% copy-paste from the PDF or run pdftotext, the location
+% and date marker icons for \cvevent will paste as correct
+% translations. For example Spanish:
+% \renewcommand{\locationname}{Ubicación}
+% \renewcommand{\datename}{Fecha}
+
+%% Use (and optionally edit if necessary) this .tex if you
+%% want an originally numerical reference style like IEEE
+%% for your publication list
+% \input{pubs-num}
+
+\begin{document}
+\name{Guillaume NANTY}
+\tagline{Site Reliability Engineer}
+\photoR{3.7cm}{picture}
+% \photoL{3.2cm}{picture}
+
+\personalinfo{%
+  \email{jobs.gnanty@proton.me}
+  \phone{(+33) 626877533}
+  % \mailaddress{My address, POSTAL CODE}
+  \location{Tavel, FRANCE}
+  % \homepage{kongrooparadox.github.io}
+  \linkedin{guillaume_nanty_30_en}
+  \github{KongrooParadox}
+  %% You can add your own arbitrary detail with
+  %% \printinfo{symbol}{detail}[optional hyperlink prefix]
+  % \printinfo{\faPaw}{Hey ho!}[https://example.com/]
+
+  %% Or you can declare your own field with
+  %% \NewInfoFiled{fieldname}{symbol}[optional hyperlink prefix] and use it:
+  % \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
+  % \gitlab{KongrooParadox}
+  %%
+  %% For services and platforms like Mastodon where there isn't a
+  %% straightforward relation between the user ID/nickname and the hyperlink,
+  %% you can use \printinfo directly e.g.
+  % \printinfo{\faMastodon}{@username@instace}[https://instance.url/@username]
+  %% But if you absolutely want to create new dedicated info fields for
+  %% such platforms, then use \NewInfoField* with a star:
+  % \NewInfoField*{mastodon}{\faMastodon}
+  % %% then you can use \mastodon, with TWO arguments where the 2nd argument is
+  % %% the full hyperlink.
+  % \mastodon{@username@instance}{https://instance.url/@username}
+}
+
+\makecvheader
+%% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
+% \AtBeginEnvironment{itemize}{\small}
+
+%% Set the left/right column width ratio to 6:4.
+\columnratio{0.6}
+
+% Start a 2-column paracol. Both the left and right columns will automatically
+% break across pages if things get too long.
+\begin{paracol}{2}
+\cvsection{Experience}
+
+\cvevent{Freelance – Production Engineer}{FDJ United}{Jan 2024 -- Ongoing}{Vitrolles, France (13)}
+I ensure the smooth operation of the FDJ Illiko digital games platform within a
+team of 10 people.
+
+\underline{Tasks :}
+\begin{itemize}
+\item Carry out Production Deployments (MEP) and Service Launches
+\item Ensure the working order of the platform through observability
+\item Contribute to the technical testing strategy
+\item Implement orchestration of workloads with argo-workflows
+\item Implement chaos engineering
+\end{itemize}
+
+\underline{Tech stack :}
+\begin{itemize}
+\item Kubernetes (Rancher), Helmfile, PostgreSQL, Kafka, Grafana, Gitlab, Argo-workflows, Litmuschaos
+\end{itemize}
+
+\divider
+
+\cvevent{Lead Devops Engineer}{PACK Solutions}{Jan 2022 -- Dec 2023}{Les Angles, France (30)}
+My job is to design and implement the infrastructure and CI for a complete rework of the companies' software product.
+A cutting edge Web suite based on microservices architecture and driven by a BPMN engine.
+
+\underline{Tasks :}
+\begin{itemize}
+\item Design and implementation of the CI/CD (Gitlab)
+\item Setup \& admin of on-premises vanilla Kubernetes cluster
+\end{itemize}
+\underline{Tech stack:}
+\begin{itemize}
+\item Angular 14, Java 17, Maven, Quarkus, Kafka, Kogito, PostgreSQL, Keycloak, HashiCorp Vault
+\end{itemize}
+
+\divider
+
+\cvevent{Release Manager}{PACK Solutions}{Feb 2019 -- Dec 2021}{Les Angles, France (30)}
+Working in a small team of 2 people, I actively collaborate with both the development teams and the infrastructure department, working on the internally developed insurance management software.
+\underline{Tasks :}
+\begin{itemize}
+\item Handle the configuration and deployment of all environments
+\item Manage the version control sytems, the Continuous Integration tooling and releases
+\item Implement SAST analysis of all projects with SonarQube, Angular CI/CD with Jenkins pipelines source code search and cross reference engine OpenGrok, centralized logging with Elastic Stack
+\end{itemize}
+\underline{Tech stack:}
+\begin{itemize}
+\item Angular, Java, Tomcat, Oracle, Flyway, Delphi, PHP, Kafka, SVN, Git
+\end{itemize}
+
+% \cvsection{Projects}
+%
+% \cvevent{Project 1}{Funding agency/institution}{}{}
+% \begin{itemize}
+% \item Details
+% \end{itemize}
+%
+% \divider
+%
+% \cvevent{Project 2}{Funding agency/institution}{Project duration}{}
+% A short abstract would also work.
+%
+% \medskip
+%
+% use ONLY \newpage if you want to force a page break for
+% ONLY the current column
+\newpage
+
+%% Switch to the right column. This will now automatically move to the second
+%% page if the content is too long.
+\switchcolumn
+
+\cvsection{About me}
+
+\begin{quote}
+Passionate about the DevOps philosophy, automation, Linux systems, and optimizing my workflow.
+
+I thrive working under pressure, either independently or as part of a team.
+\end{quote}
+
+\cvsection{Strengths}
+
+\cvtag{Hard-working}
+\cvtag{Pragmatic}
+\cvtag{Problem solving}
+\cvtag{Self-learning}
+
+\divider\smallskip
+
+\cvtag{Active listening}
+\cvtag{Empathetic}
+\cvtag{Team player}
+\cvtag{Communication skills}
+
+% \divider\smallskip
+%
+% \cvtag{C++}
+% \cvtag{Embedded Systems}\\
+% \cvtag{Statistical Analysis}
+%
+\cvsection{Skills}
+
+% Adapted from @Jake's answer from http://tex.stackexchange.com/a/82729/226
+% \wheelchart{outer radius}{inner radius}{
+% comma-separated list of value/text width/color/detail}
+\wheelchart{1.5cm}{0.7cm}{%
+  4/3em/accent!30/{Terraform, Ansible},
+  6/3em/accent!40/Git,
+  8/3em/accent!60/{CI/CD},
+  4/4em/accent/Nix,
+  5/2em/accent!20/{Python, Bash}
+}
+
+\cvsection{Languages}
+
+\cvskill{English}{5}
+\divider
+
+\cvskill{French}{5}
+\divider
+
+\cvskill{Spanish}{4}
+
+%% Yeah I didn't spend too much time making all the
+%% spacing consistent... sorry. Use \smallskip, \medskip,
+%% \bigskip, \vspace etc to make adjustments.
+\medskip
+
+\cvsection{Education}
+
+\cvevent{Bachelor’s \& Master’s Degree in Computer Science and Networking}{University of Avignon, (France)}{Sept 2015 -- June 2019}{}
+\divider
+
+% \cvevent{ Degree in Computer Networking}{University of Avignon, (France)}{Sept 2015 -- June 2017}{}
+% \divider
+%
+\cvevent{BTS SIO - 2 year post A levels course in web development}{Lycée Honoré d'Estienne d'Orves, Nice (France)}{Sept 2013 -- June 2015}{}
+
+\end{paracol}
+
+
+\end{document}
