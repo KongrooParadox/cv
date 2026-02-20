@@ -3,11 +3,17 @@ on:
   pull_request:
   push:
     branches: [main]
+    tags: [v*.*.*]
 jobs:
-  tests:
+  build:
     strategy:
       matrix:
         os: [ubuntu-24.04-arm, ubuntu-24.04]
+        include:
+          - os: ubuntu-24.04-arm
+            arch: arm64
+          - os: ubuntu-24.04
+            arch: x86
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v5
@@ -16,3 +22,26 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - run: nix build
       - run: nix flake check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cv-${{ matrix.arch }}
+          path: result/main.pdf
+  release:
+    needs: [build]
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v5
+      - name: check if pdfs are bit-for-bit identical
+        run: |
+          cmp cv-arm64/main.pdf cv-x86/main.pdf
+          if [[ $? -ne 0 ]]; then
+            exit 1
+          fi
+          mv cv-arm64/main.pdf ./cv.pdf
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            cv.pdf
