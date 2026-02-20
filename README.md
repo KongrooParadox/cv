@@ -6,7 +6,7 @@ First attempt at a CV using LaTeX.
 
 - [x] Working LaTeX document
 - [x] Build using Nix (because why not make it reproducible ?)
-- [ ] Build with Github Actions
+- [x] Build with Github Actions
 - [ ] Release with Github Actions
 
 ## Credits
