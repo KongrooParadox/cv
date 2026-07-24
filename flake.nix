@@ -73,7 +73,7 @@
               src = self;
               buildInputs = [
                 pkgs.coreutils
-                pkgs.fira-code
+                pkgs.route159
                 tex
               ];
               phases = [
@@ -83,8 +83,8 @@
               ];
               buildPhase = ''
                 export PATH="${pkgs.lib.makeBinPath buildInputs}";
-                env HOME=$(mktemp -d) \
-                SOURCE_DATE_EPOCH=$(date -d "2025-02-07" +%s) \
+                env HOME=$(mktemp -d) OSFONTDIR=${pkgs.route159}/share/fonts \
+                SOURCE_DATE_EPOCH=$(date -d "2026-07-27" +%s) \
                 latexmk -interaction=nonstopmode -pdf -lualatex \
                 -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
                 -usepretex main.tex
