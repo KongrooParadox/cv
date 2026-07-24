@@ -29,6 +29,7 @@
               accsupp
               adjustbox
               biblatex
+              changepage
               cmap
               dashrule
               enumitem
@@ -42,11 +43,14 @@
               geometry
               hyperref
               ifmtarg
+              iftex
               infwarerr
               latex-bin
               latexmk
               lato
               ltxcmds
+              luatex85
+              luatexbase
               multirow
               paracol
               pdftexcmds
@@ -54,11 +58,11 @@
               pgf
               roboto
               scheme-minimal
+              simpleicons
               tcolorbox
               tikzfill
               xcolor
               xmpincl
-              changepage
               ;
           };
         in
@@ -79,11 +83,10 @@
               ];
               buildPhase = ''
                 export PATH="${pkgs.lib.makeBinPath buildInputs}";
-                mkdir -p .cache/texmf-var
-                env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
+                env HOME=$(mktemp -d) \
                 SOURCE_DATE_EPOCH=$(date -d "2025-02-07" +%s) \
-                latexmk -interaction=nonstopmode -pdf -pdflatex \
-                -pretex="\pdftrailerid{}" \
+                latexmk -interaction=nonstopmode -pdf -lualatex \
+                -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
                 -usepretex main.tex
               '';
               installPhase = ''
